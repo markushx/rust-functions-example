@@ -17,6 +17,8 @@ async fn main() -> Result<(), Error> {
 pub(crate) async fn my_handler(event: ApiGatewayProxyRequest, _ctx: Context) -> Result<ApiGatewayProxyResponse, Error> {
     let path = event.path.unwrap();
 
+    log::warn!("my_handler called: {}.", path);
+    
     let resp = ApiGatewayProxyResponse {
         status_code: 200,
         headers: HeaderMap::new(),
