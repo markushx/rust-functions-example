@@ -4,6 +4,7 @@ use http::header::HeaderMap;
 use lambda_runtime::{handler_fn, Context, Error};
 use log::LevelFilter;
 use simple_logger::SimpleLogger;
+use reqwest;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -17,8 +18,14 @@ async fn main() -> Result<(), Error> {
 pub(crate) async fn my_handler(event: ApiGatewayProxyRequest, _ctx: Context) -> Result<ApiGatewayProxyResponse, Error> {
     let path = event.path.unwrap();
 
-    log::warn!("my_handler called: {}.", path);
+    log::warn!("my_handler called: {}", path);
     
+    let body = reqwest::get("https://www.etfscreen.com/muscular-portfolios/index.php?t=pd")
+    .await?
+    .text()
+    .await?;
+    log::warn!("body: {}", body);
+
     let resp = ApiGatewayProxyResponse {
         status_code: 200,
         headers: HeaderMap::new(),
