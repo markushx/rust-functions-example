@@ -26,6 +26,12 @@ pub(crate) async fn my_handler(event: ApiGatewayProxyRequest, _ctx: Context) -> 
     .await?;
     log::warn!("body: {}", body);
 
+    let client = reqwest::Client::new();
+    let _res = client.post("https://hooks.zapier.com/hooks/catch/4151210/3itwedc/")
+        .body(body)
+        .send()
+        .await;
+
     let resp = ApiGatewayProxyResponse {
         status_code: 200,
         headers: HeaderMap::new(),
