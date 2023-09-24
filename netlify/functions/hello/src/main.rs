@@ -26,8 +26,10 @@ pub(crate) async fn my_handler(event: ApiGatewayProxyRequest, _ctx: Context) -> 
     .await?;
     log::warn!("body: {}", body);
 
+    let zapier_webhook_url = env::var("ZAPIER_WEBHOOK_URL").unwrap();
+
     let client = reqwest::Client::new();
-    let _res = client.post("https://hooks.zapier.com/hooks/catch/4151210/3itwedc/")
+    let _res = client.post(zapier_webhook_url)
         .body(body)
         .send()
         .await;
