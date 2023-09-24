@@ -2,4 +2,4 @@
 environment = { NETLIFY_EXPERIMENTAL_BUILD_RUST_SOURCE = "true" }
 
 [functions."hello"]
-schedule = "20 * * * *"
+schedule = "25 * * * *"

@@ -1,3 +1,5 @@
+use std::env;
+
 use aws_lambda_events::event::apigw::{ApiGatewayProxyRequest, ApiGatewayProxyResponse};
 use aws_lambda_events::encodings::Body;
 use http::header::HeaderMap;
